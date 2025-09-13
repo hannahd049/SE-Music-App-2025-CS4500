@@ -2,6 +2,9 @@
 #Songs information is loaded from the first song is played
 #If Next song is clicked the information is loaded and the next song plays
 
+#pip install mutagen
+#pip3 install pygame
+
 import os
 import random
 import pygame
@@ -92,3 +95,4 @@ def Main():
 
 
 Main()
+
