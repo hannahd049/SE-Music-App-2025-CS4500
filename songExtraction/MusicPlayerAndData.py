@@ -8,11 +8,12 @@
 #pip3 install pygame
 
 import os
-import random
-import pygame 
+import random 
+import pygame #utalized in the music player
 import re
-import threading 
+import threading #utalized in the timer 
 
+#utalized in pulling the ID3
 from mutagen.easyid3 import EasyID3 
 from mutagen.id3 import ID3, ID3NoHeaderError 
 
@@ -30,13 +31,14 @@ def Player():
 
     MusicData(file_path) 
 
+    #the two playlists created for voting yes or no to the songs
     yayList = [] 
     nayList = [] 
 
-    menu = 0 
-    menu2 = 0
-    count = 0
-    timer = None 
+    menu = 0 #main menue of the player interface
+    menu2 = 0 #the menue used to intereact with the playlists that were created
+    count = 0 # I don't think this is doing anything?
+    timer = None #timer used to ensure that 30 sec segments are what play not the full song
 
     while menu != 7: 
         
@@ -57,54 +59,61 @@ def Player():
         print("- - - - - - - - - - - - ")
 
 
-        if menu ==  1: 
+        if menu ==  1: #Play Music/restart current song
             pygame.mixer.music.play()
             if timer:
                 timer.cancel()
             timer = threading.Timer(30, pygame.mixer.music.stop)
             timer.start()
 
-        if menu == 2: 
+        if menu == 2: #pause music
             pygame.mixer.music.pause()
             if timer:
                 timer.cancel()
 
-        if menu == 3: 
+        if menu == 3: #unpause 
             pygame.mixer.music.unpause()
 
-        if menu == 4: 
+        if menu == 4: #Add to the yay playlist and go to the next song
+            #add to playlist
             yayList.append(file_path) 
 
+            #select next song and pull the data
             random_mp3 = random.choice(mp3_files)
             file_path = os.path.join(folder_path, random_mp3)
             pygame.mixer.music.load(file_path)
             pygame.mixer.music.play()
             MusicData(file_path) 
 
+            #30 second timer
             if timer:
                 timer.cancel()
             timer= threading.Timer(30, pygame.mixer.music.stop)
             timer.start()
 
-        if menu == 5: 
+        if menu == 5: #Add to the nay playlist and go to the next song
+            #add to playlist
             nayList.append(file_path)
 
+            #select next song and pull the data
             random_mp3 = random.choice(mp3_files)
             file_path = os.path.join(folder_path, random_mp3)
             pygame.mixer.music.load(file_path)
             pygame.mixer.music.play()
             MusicData(file_path)
 
+            #30 sec timer
             if timer:
                 timer.cancel()
             timer= threading.Timer(30, pygame.mixer.music.stop)
             timer.start()
 
+        #move over to the other menu to interact with the playlists (next page)
         if menu == 6: 
             menu = 7
             menu2 = 1 
 
-    while menu2 != 0: 
+    while menu2 != 0: #playlist interaction menu
         print("- - - - - - - - - - - - ")
         print("1 - Return to Player")
         print("2 - See Yay and Nay List")
@@ -123,16 +132,18 @@ def Player():
             menu2 = 0 
             menu = 0 
 
-        if menu2 == 2: 
+        if menu2 == 2: #displays the file paths of the songs in playlist, I was mostly using this to test that they were adding correctly. 
+                         #In practice these would just display the name,artist, and cover image and be clickable to the song and maybe another menu.
             print("Yays: ", yayList)
             print("Nays: ", nayList)
 
-        if menu2 == 3: 
+        if menu2 == 3: #Play Yay List
             pygame.mixer.music.load(yayList[0]) 
 
             yayListPlayer = 0 
             nextSong = 0
 
+            #interaction menu for the playlist
             while yayListPlayer != 5:
 
                 print("- - - - - - - - - - - - ")
@@ -157,7 +168,7 @@ def Player():
                 if yayListPlayer == 3: 
                     pygame.mixer.music.unpause()
 
-                if yayListPlayer == 4: 
+                if yayListPlayer == 4: #moves to the next song, need to impliment a loop so it doesn't go out of index
 
                     nextSong += 1
 
@@ -172,6 +183,7 @@ def Player():
             nayListPlayer = 0 
             nextSong = 0 
 
+            #interaction menu for the playlist
             while nayListPlayer != 5:
 
                 print("- - - - - - - - - - - - ")
@@ -196,7 +208,7 @@ def Player():
                 if nayListPlayer == 3: 
                     pygame.mixer.music.unpause()
 
-                if nayListPlayer == 4: 
+                if nayListPlayer == 4: #moves to the next song, need to impliment a loop so it doesn't go out of index
 
                     nextSong += 1
 
@@ -206,12 +218,11 @@ def Player():
                     MusicData(file_path) 
 
             
-
+#pulls the title,artist, and album cover information out of the mp3 file 
 def MusicData(mp3_file):
     cover_folder = r"C:/Users/green/Music/Music/Covers" #"C:/Users/Emma/Music/Covers"
     audio = EasyID3(mp3_file)
 
-    
 
     title = audio.get("title",["Not Title Found"])[0]
     artist = audio.get("artist",["Not Artist Found"])[0]
