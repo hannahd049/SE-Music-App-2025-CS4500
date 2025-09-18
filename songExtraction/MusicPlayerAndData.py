@@ -1,7 +1,8 @@
 #Combination of MusicData2 and MusicPlayer
 #Songs information is loaded from the first song is played
 #If Next song is clicked the information is loaded and the next song plays
-#updated with more menus and playlists
+#updated with more menus and playlists 
+#added Zimani's timer
 
 #pip install mutagen
 #pip3 install pygame
@@ -10,6 +11,8 @@ import os
 import random
 import pygame 
 import re
+import threading 
+
 from mutagen.easyid3 import EasyID3 
 from mutagen.id3 import ID3, ID3NoHeaderError 
 
@@ -33,6 +36,7 @@ def Player():
     menu = 0 
     menu2 = 0
     count = 0
+    timer = None 
 
     while menu != 7: 
         
@@ -43,7 +47,6 @@ def Player():
         print("4 - Vote Yay")
         print("5 - Vote Nay")
         print("6 - Go to playlists")
-        
         print("7 - Exit")
         #print()
         
@@ -56,9 +59,15 @@ def Player():
 
         if menu ==  1: 
             pygame.mixer.music.play()
+            if timer:
+                timer.cancel()
+            timer = threading.Timer(30, pygame.mixer.music.stop)
+            timer.start()
 
         if menu == 2: 
             pygame.mixer.music.pause()
+            if timer:
+                timer.cancel()
 
         if menu == 3: 
             pygame.mixer.music.unpause()
@@ -72,6 +81,11 @@ def Player():
             pygame.mixer.music.play()
             MusicData(file_path) 
 
+            if timer:
+                timer.cancel()
+            timer= threading.Timer(30, pygame.mixer.music.stop)
+            timer.start()
+
         if menu == 5: 
             nayList.append(file_path)
 
@@ -81,17 +95,23 @@ def Player():
             pygame.mixer.music.play()
             MusicData(file_path)
 
+            if timer:
+                timer.cancel()
+            timer= threading.Timer(30, pygame.mixer.music.stop)
+            timer.start()
+
         if menu == 6: 
             menu = 7
             menu2 = 1 
 
     while menu2 != 0: 
         print("- - - - - - - - - - - - ")
-        print("1 - return to player")
+        print("1 - Return to Player")
         print("2 - See Yay and Nay List")
-        print("3 - play yay list")
-        print("4 - play nay list")
-        print("0 - exit") 
+        print("3 - Play Yay List")
+        print("4 - Play Nay List")
+        print("0 - Exit") 
+        print("- - - - - - - - - - - - ")
 
         print("- - - - - - - - - - - - ")
         print()
@@ -119,8 +139,8 @@ def Player():
                 print("1 - Play Music/restart current song")
                 print("2 - Pause Music")
                 print("3 - Resume Music")
-                print("4 - next song")
-                print("5 - exit") 
+                print("4 - Next Song")
+                print("5 - Exit") 
                 print("- - - - - - - - - - - - ") 
 
 
@@ -159,7 +179,7 @@ def Player():
                 print("2 - Pause Music")
                 print("3 - Resume Music")
                 print("4 - Next song")
-                print("5 - exit") 
+                print("5 - Exit") 
                 print("- - - - - - - - - - - - ") 
 
 
