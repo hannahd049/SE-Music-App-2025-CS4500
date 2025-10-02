@@ -5,7 +5,7 @@ import pygame
 
 # -------------------- CONFIG --------------------
 MUSIC_FOLDER = "/Users/hannahgrace/Documents/se-4500-music/Songs"
-PREVIEW_SECONDS = 30  
+PREVIEW_SECONDS = 30  # optional auto-stop
 
 # -------------------- INIT --------------------
 app = Flask(__name__)
