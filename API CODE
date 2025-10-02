@@ -1,0 +1,96 @@
+from flask import Flask, jsonify
+import os
+import random
+import pygame
+
+# -------------------- CONFIG --------------------
+MUSIC_FOLDER = "/Users/hannahgrace/Documents/se-4500-music/Songs"
+PREVIEW_SECONDS = 30  
+
+# -------------------- INIT --------------------
+app = Flask(__name__)
+
+mp3_files = []
+current_song = None
+
+pygame.mixer.init()
+print("pygame mixer initialized")
+
+# -------------------- HELPERS --------------------
+def init_song_list():
+    global mp3_files
+    mp3_files = [f for f in os.listdir(MUSIC_FOLDER) if f.endswith(".mp3")]
+    if not mp3_files:
+        raise RuntimeError(f"No MP3 files found in {MUSIC_FOLDER}")
+    print("Loaded songs:", mp3_files)
+
+def play_song(filename):
+    global current_song
+    path = os.path.join(MUSIC_FOLDER, filename)
+    if not os.path.exists(path):
+        print("ERROR: File not found:", path)
+        return False
+
+    current_song = filename
+    print("Playing:", path)
+    pygame.mixer.music.load(path)
+    pygame.mixer.music.play()  # main thread playback
+    return True
+
+def play_random_song():
+    if not mp3_files:
+        init_song_list()
+    song = random.choice(mp3_files)
+    if play_song(song):
+        return song
+    return None
+
+# -------------------- ROUTES --------------------
+@app.route("/play")
+def play():
+    print("Flask received /play request") 
+    song = play_random_song()
+    if song:
+        print("Flask is starting to play:", song)  
+        return jsonify({"status": "playing", "song": song})
+    return jsonify({"status": "error", "message": "No song found"})
+
+
+@app.route("/skip")
+def skip():
+    song = play_random_song()
+    if song:
+        return jsonify({"status": "skipped", "song": song})
+    return jsonify({"status": "error", "message": "No song found"})
+
+@app.route("/like_skip")
+def like_skip():
+    song = play_random_song()
+    if song:
+        return jsonify({"status": "liked_and_skipped", "song": song})
+    return jsonify({"status": "error", "message": "No song found"})
+
+@app.route("/pause")
+def pause():
+    pygame.mixer.music.pause()
+    return jsonify({"status": "paused", "song": current_song})
+
+@app.route("/resume")
+def resume():
+    pygame.mixer.music.unpause()
+    return jsonify({"status": "resumed", "song": current_song})
+
+@app.route("/stop")
+def stop():
+    pygame.mixer.music.stop()
+    return jsonify({"status": "stopped", "song": current_song})
+
+@app.route("/status")
+def status():
+    playing = pygame.mixer.music.get_busy()
+    return jsonify({"status": "playing" if playing else "stopped", "song": current_song})
+
+# -------------------- MAIN --------------------
+if __name__ == "__main__":
+    init_song_list()
+    app.run(host="127.0.0.1", port=5000)
