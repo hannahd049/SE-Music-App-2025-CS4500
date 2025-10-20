@@ -55,6 +55,15 @@ def play():
         return jsonify({"status": "playing", "song": song})
     return jsonify({"status": "error", "message": "No song found"})
 
+@app.route("/replay")
+def replay(): 
+    print("Flask Received /replay request")
+    song = current_song
+    pygame.mixer.music.play()
+    if song:
+        print("Flask is starting to replay:", song)  
+        return jsonify({"status": "playing", "song": song})
+    return jsonify({"status": "error", "message": "No song found"})
 
 @app.route("/skip")
 def skip():
