@@ -74,10 +74,23 @@ def skip():
 
 @app.route("/like_skip")
 def like_skip():
-    song = play_random_song()
-    if song:
-        return jsonify({"status": "liked_and_skipped", "song": song})
-    return jsonify({"status": "error", "message": "No song found"})
+
+    global liked_songs,current_song
+
+    print("like/skip")
+    if current_song not in liked_songs:
+        liked_songs.append(current_song)
+        print(f"Added to likedsongs{current_song}")
+    song = play_random()
+    return jsonify({"status": "playing", 
+                    "song": song,
+                    "liked_songs": liked_songs}),
+
+@app.route("/list")
+def list():
+    for song in liked_songs:
+        print(song)
+    return jsonify({"status": "paused", "song": current_song})
 
 @app.route("/pause")
 def pause():
