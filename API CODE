@@ -89,6 +89,14 @@ def resume():
     pygame.mixer.music.unpause()
     return jsonify({"status": "resumed", "song": current_song})
 
+@app.route("/pauseresume")
+def pauseresume(): 
+    playing = pygame.mixer.music.get_busy()
+    if playing:
+        pygame.mixer.music.pause()
+    else: 
+        pygame.mixer.music.unpause()
+
 @app.route("/stop")
 def stop():
     pygame.mixer.music.stop()
