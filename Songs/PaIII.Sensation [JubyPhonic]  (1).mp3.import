@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7ks0pstxtmjl"
+path="res://.godot/imported/PaIII.Sensation [JubyPhonic]  (1).mp3-d231b4e46c336badfc10a6dddf20e668.mp3str"
+
+[deps]
+
+source_file="res://Songs/PaIII.Sensation [JubyPhonic]  (1).mp3"
+dest_files=["res://.godot/imported/PaIII.Sensation [JubyPhonic]  (1).mp3-d231b4e46c336badfc10a6dddf20e668.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

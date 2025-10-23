@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://b446rlfgqc66p"]
 
-[ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://UI SI Music BLANK TEMPLATE.png" id="1_8vb6a"]
-[ext_resource type="AudioStream" uid="uid://c71px234mg0xk" path="res://Songs/01 Dynamite.mp3" id="2_45uoe"]
-[ext_resource type="Script" uid="uid://b2k3lsbong3g1" path="res://audio_stream_player_2d.gd" id="4_jhi6i"]
+[ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI SI Music BLANK TEMPLATE.png" id="1_8vb6a"]
+[ext_resource type="Script" uid="uid://b7o8yh73yx7pa" path="res://Scripts/SongPlayer.gd" id="2_rvwty"]
+[ext_resource type="Script" uid="uid://cxbqe11pos07d" path="res://Scripts/ApiClient.gd" id="3_jhi6i"]
 
 [node name="UiSiMusicBlankTemplate" type="Sprite2D"]
-position = Vector2(705.50006, 1216.75)
-scale = Vector2(3.3209238, 3.2559838)
+position = Vector2(153, 304)
+scale = Vector2(0.7761481, 0.76097065)
 texture = ExtResource("1_8vb6a")
 
 [node name="X button" type="Button" parent="."]
@@ -17,7 +17,6 @@ offset_bottom = 333.0
 flat = true
 
 [node name="Control" type="AudioStreamPlayer" parent="X button"]
-stream = ExtResource("2_45uoe")
 
 [node name="replay button" type="Button" parent="."]
 offset_left = -9.65741
@@ -54,13 +53,19 @@ offset_right = 275.174
 offset_bottom = -301.236
 flat = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="YourListButton"]
-position = Vector2(22.970013, 30.994204)
-script = ExtResource("4_jhi6i")
-
 [node name="home button" type="Button" parent="."]
 offset_left = -170.116
 offset_top = -359.236
 offset_right = -112.116
 offset_bottom = -301.236
 flat = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_rvwty")
+
+[node name="ApiClient" type="Node" parent="AudioStreamPlayer2D"]
+script = ExtResource("3_jhi6i")
+
+[connection signal="pressed" from="X button" to="AudioStreamPlayer2D" method="next_pressed"]
+[connection signal="pressed" from="replay button" to="AudioStreamPlayer2D" method="replay_presssed"]
+[connection signal="pressed" from="like button" to="AudioStreamPlayer2D" method="like_pressed"]

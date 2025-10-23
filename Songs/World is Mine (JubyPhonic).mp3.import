@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://qk4kp5q80x6f"
+path="res://.godot/imported/World is Mine (JubyPhonic).mp3-9b5d82ee1b27255d795333540238b08f.mp3str"
+
+[deps]
+
+source_file="res://Songs/World is Mine (JubyPhonic).mp3"
+dest_files=["res://.godot/imported/World is Mine (JubyPhonic).mp3-9b5d82ee1b27255d795333540238b08f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
