@@ -1,76 +1,64 @@
+"""
+music_api.py
+------------
+A Flask-based REST API that controls a pygame music player.
+
+Endpoints:
+    /play   – Pick a random song and play 30-second preview
+    /pause  – Pause playback
+    /resume – Resume playback
+    /stop   – Stop playback
+    /status – Optional: return current song & state
+"""
+
 from flask import Flask, jsonify
 import os
 import random
+import threading
 import pygame
 
 # -------------------- CONFIG --------------------
-MUSIC_FOLDER = "/Users/hannahgrace/Documents/se-4500-music/Songs"
-PREVIEW_SECONDS = 30  # optional auto-stop
+MUSIC_FOLDER = r"C:\\Visual Studio Code\\Play or Nay\\Songs"   # <-- change if needed
+PREVIEW_SECONDS = 30
+# -------------------------------------------------
 
-# -------------------- INIT --------------------
 app = Flask(__name__)
 
+# Global state
 mp3_files = []
 current_song = None
+timer = None
+liked_songs = []
 
+# Initialize mixer
 pygame.mixer.init()
-print("pygame mixer initialized")
 
-# -------------------- HELPERS --------------------
 def init_song_list():
+    """Populate the list of mp3 files once at startup."""
     global mp3_files
-    mp3_files = [f for f in os.listdir(MUSIC_FOLDER) if f.endswith(".mp3")]
+    mp3_files = [f for f in os.listdir(MUSIC_FOLDER) if f.lower().endswith(".mp3")]
     if not mp3_files:
-        raise RuntimeError(f"No MP3 files found in {MUSIC_FOLDER}")
-    print("Loaded songs:", mp3_files)
+        raise RuntimeError(f"No .mp3 files found in {MUSIC_FOLDER}")
 
-def play_song(filename):
-    global current_song
-    path = os.path.join(MUSIC_FOLDER, filename)
-    if not os.path.exists(path):
-        print("ERROR: File not found:", path)
-        return False
-
-    current_song = filename
-    print("Playing:", path)
-    pygame.mixer.music.load(path)
-    pygame.mixer.music.play()  # main thread playback
-    return True
-
-def play_random_song():
+def play_random():
+    """Pick a random mp3 and play a 30-second preview."""
+    global current_song, timer
     if not mp3_files:
         init_song_list()
     song = random.choice(mp3_files)
-    if play_song(song):
-        return song
-    return None
+    path = os.path.join(MUSIC_FOLDER, song)
+    pygame.mixer.music.load(path)
+    pygame.mixer.music.play()
+    current_song = song
+
+    # 30-second timer to auto-stop
+    if timer:
+        timer.cancel()
+    timer = threading.Timer(PREVIEW_SECONDS, pygame.mixer.music.stop)
+    timer.start()
+    return song
 
 # -------------------- ROUTES --------------------
-@app.route("/play")
-def play():
-    print("Flask received /play request") 
-    song = play_random_song()
-    if song:
-        print("Flask is starting to play:", song)  
-        return jsonify({"status": "playing", "song": song})
-    return jsonify({"status": "error", "message": "No song found"})
-
-@app.route("/replay")
-def replay(): 
-    print("Flask Received /replay request")
-    song = current_song
-    pygame.mixer.music.play()
-    if song:
-        print("Flask is starting to replay:", song)  
-        return jsonify({"status": "playing", "song": song})
-    return jsonify({"status": "error", "message": "No song found"})
-
-@app.route("/skip")
-def skip():
-    song = play_random_song()
-    if song:
-        return jsonify({"status": "skipped", "song": song})
-    return jsonify({"status": "error", "message": "No song found"})
 
 @app.route("/like_skip")
 def like_skip():
@@ -86,41 +74,52 @@ def like_skip():
                     "song": song,
                     "liked_songs": liked_songs}),
 
-@app.route("/list")
-def list():
-    for song in liked_songs:
-        print(song)
-    return jsonify({"status": "paused", "song": current_song})
+
+@app.route("/stop")
+def stop():
+    print("stop")
+    pygame.mixer.music.stop()
+    song = play_random()
+    return jsonify({"status": "stopped", "song": current_song})
+
 
 @app.route("/pause")
 def pause():
     pygame.mixer.music.pause()
     return jsonify({"status": "paused", "song": current_song})
 
+@app.route("/list")
+def list():
+    for song in liked_songs:
+        print(song)
+    return jsonify({"status": "paused", "song": current_song})
+@app.route("/replay")
+def replay(): 
+    print("Flask Received /replay request")
+    song = current_song
+    pygame.mixer.music.play()
+    if song:
+        print("Flask is starting to replay:", song)  
+        return jsonify({"status": "playing", "song": song})
+    return jsonify({"status": "error", "message": "No song found"})
+'''
 @app.route("/resume")
 def resume():
     pygame.mixer.music.unpause()
     return jsonify({"status": "resumed", "song": current_song})
-
-@app.route("/pauseresume")
-def pauseresume(): 
-    playing = pygame.mixer.music.get_busy()
-    if playing:
-        pygame.mixer.music.pause()
-    else: 
-        pygame.mixer.music.unpause()
-
-@app.route("/stop")
-def stop():
-    pygame.mixer.music.stop()
-    return jsonify({"status": "stopped", "song": current_song})
-
+'''
+'''
 @app.route("/status")
 def status():
     playing = pygame.mixer.music.get_busy()
-    return jsonify({"status": "playing" if playing else "stopped", "song": current_song})
+    return jsonify({
+        "status": "playing" if playing else "stopped",
+        "song": current_song
+    })
+'''
+# -------------------- MAIN -----------------------
 
-# -------------------- MAIN --------------------
 if __name__ == "__main__":
     init_song_list()
+    # Start Flask development server (accessible to Godot via localhost)
     app.run(host="127.0.0.1", port=5000)
