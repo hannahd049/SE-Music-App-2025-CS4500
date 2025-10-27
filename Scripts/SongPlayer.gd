@@ -2,15 +2,16 @@ class_name SongPlayer
 extends AudioStreamPlayer
 
 var api_client: ApiClient = null
+var name_label: Label = null
 var last_position: float = 0
 var song_id: int = 0
-var song_name: String = "Loading..."
 
 func _init() -> void:
 	pass
 	
 func _enter_tree() -> void:
 	api_client = get_node("ApiClient")
+	name_label = get_node("SongNameLabel")
 	api_client.song_received.connect(_on_song_received)
 	get_after_next_frame()
 
@@ -51,21 +52,13 @@ func _load_next_song() -> void:
 		playing = false
 	song_id = 0
 	last_position = 0
-	song_name = "Loading..."
+	name_label.text = "Loading..."
 	api_client.get_next_song()
 
-func _on_song_received(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
-	if result != HTTPRequest.RESULT_SUCCESS:
-		push_error("Request failed with error: " +  "%s" % response_code)
-		
-	for h in headers:
-		if h.begins_with("SongName: "):
-			song_name = h.trim_prefix("SongName: ")
-		elif h.begins_with("SongId: "):
-			song_id = int(h.trim_prefix("SongId: "))
-			
+func _on_song_received(name: String, id: int, body: PackedByteArray) -> void:
 	print("Song received")
-	print(song_name)
+	name_label.text = name
+	song_id = id
 	print(song_id)
 	stream = AudioStreamMP3.load_from_buffer(body)
 	play_pressed()

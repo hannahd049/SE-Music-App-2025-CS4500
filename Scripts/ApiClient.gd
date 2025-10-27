@@ -31,4 +31,15 @@ func get_next_song():
 		push_error("Failed to request next song: " + error)
 		
 func _on_response(result, response_code, headers, body) -> void:
-	song_received.emit(result, response_code, headers, body)
+	if result != HTTPRequest.RESULT_SUCCESS:
+		push_error("Request failed with error: " +  "%s" % response_code)
+	
+	var song_name = ""
+	var song_id = 0
+	for h in headers:
+		if h.begins_with("SongName: "):
+			song_name = h.trim_prefix("SongName: ")
+		elif h.begins_with("SongId: "):
+			song_id = int(h.trim_prefix("SongId: "))
+	
+	song_received.emit(song_name, song_id, body)

@@ -59,6 +59,16 @@ script = ExtResource("2_rvwty")
 [node name="ApiClient" type="Node" parent="AudioStreamPlayer2D"]
 script = ExtResource("3_jhi6i")
 
+[node name="SongNameLabel" type="Label" parent="AudioStreamPlayer2D"]
+offset_left = 65.99999
+offset_top = 138.0
+offset_right = 320.0
+offset_bottom = 219.0
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [connection signal="pressed" from="X button" to="AudioStreamPlayer2D" method="next_pressed"]
 [connection signal="pressed" from="replay button" to="AudioStreamPlayer2D" method="replay_presssed"]
 [connection signal="pressed" from="like button" to="AudioStreamPlayer2D" method="like_pressed"]
