@@ -12,7 +12,7 @@ public class SongController : ControllerBase
     [HttpGet("ns")]
     public IActionResult GetNextSong()
     {
-        var stream = System.IO.File.OpenRead("test.wav");
+        var stream = System.IO.File.OpenRead("test.mp3");
 
         HttpContext.Response.Headers["SongName"] = "TestSong";
         HttpContext.Response.Headers["SongId"] = "1234";

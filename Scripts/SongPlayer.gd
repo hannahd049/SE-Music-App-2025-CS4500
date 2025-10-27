@@ -67,5 +67,5 @@ func _on_song_received(result: int, response_code: int, headers: PackedStringArr
 	print("Song received")
 	print(song_name)
 	print(song_id)
-	stream = AudioStreamWAV.load_from_buffer(body)
+	stream = AudioStreamMP3.load_from_buffer(body)
 	play_pressed()
