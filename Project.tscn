@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://b446rlfgqc66p"]
 
-[ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI SI Music BLANK TEMPLATE.png" id="1_8vb6a"]
-[ext_resource type="Script" uid="uid://b7o8yh73yx7pa" path="res://Scripts/SongPlayer.gd" id="2_rvwty"]
-[ext_resource type="Script" uid="uid://cxbqe11pos07d" path="res://Scripts/ApiClient.gd" id="3_jhi6i"]
+[ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI SI Music BLANK TEMPLATE.png" id="1_b34ge"]
+[ext_resource type="Script" uid="uid://b7o8yh73yx7pa" path="res://Scripts/SongPlayer.gd" id="2_sjqfn"]
+[ext_resource type="Script" uid="uid://cxbqe11pos07d" path="res://Scripts/ApiClient.gd" id="3_1xgel"]
 
 [node name="UiSiMusicBlankTemplate" type="Sprite2D"]
 position = Vector2(153, 304)
 scale = Vector2(0.7761481, 0.76097065)
-texture = ExtResource("1_8vb6a")
+texture = ExtResource("1_b34ge")
 
 [node name="X button" type="Button" parent="."]
 offset_left = -165.0
@@ -54,20 +54,23 @@ offset_bottom = -301.236
 flat = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
-script = ExtResource("2_rvwty")
+script = ExtResource("2_sjqfn")
 
 [node name="ApiClient" type="Node" parent="AudioStreamPlayer2D"]
-script = ExtResource("3_jhi6i")
+script = ExtResource("3_1xgel")
 
 [node name="SongNameLabel" type="Label" parent="AudioStreamPlayer2D"]
-offset_left = 65.99999
-offset_top = 138.0
-offset_right = 320.0
-offset_bottom = 219.0
+offset_left = 67.0
+offset_top = 377.0
+offset_right = 321.0
+offset_bottom = 416.0
 text = "Loading..."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="ImageThumbnail" type="Sprite2D" parent="AudioStreamPlayer2D"]
+position = Vector2(196, 250)
 
 [connection signal="pressed" from="X button" to="AudioStreamPlayer2D" method="next_pressed"]
 [connection signal="pressed" from="replay button" to="AudioStreamPlayer2D" method="replay_presssed"]

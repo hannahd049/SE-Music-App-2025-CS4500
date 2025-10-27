@@ -9,11 +9,11 @@ static var userId = "user123" #todo
 func init() -> void:
 	pass #todo: save/load userid from file
 
-func rate_song(songId: int, positive: bool):
+func rate_song(song_id: int, positive: bool):
 	var request = HTTPRequest.new()
 	add_child(request)
 	
-	var body = JSON.stringify({"songId": songId, "positive" : positive, "userId" : userId})
+	var body = JSON.stringify({"songId": song_id, "positive" : positive, "userId" : userId})
 	var error = request.request(apiUrl + "/rs", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
 	
 	if error != OK:
@@ -30,6 +30,23 @@ func get_next_song():
 	if error != OK:
 		push_error("Failed to request next song: " + error)
 		
+func get_thumbnail(song_id: int, sprite: Sprite2D):
+	var request = HTTPRequest.new()
+	add_child(request)
+	
+	var error = request.request(apiUrl + "/rt?songId=" + str(song_id), [], HTTPClient.METHOD_GET)
+	
+	if error != OK:
+		push_error("Failed to request thumbnail: " + error)
+		
+	var params = await request.request_completed
+	if params[0] != HTTPRequest.RESULT_SUCCESS:
+		return
+	var img = Image.new()
+	img.load_png_from_buffer(params[3])
+	sprite.texture = ImageTexture.create_from_image(img)
+	
+
 func _on_response(result, response_code, headers, body) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS:
 		push_error("Request failed with error: " +  "%s" % response_code)
