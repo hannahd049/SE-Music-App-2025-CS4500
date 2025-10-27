@@ -1,0 +1,55 @@
+# 'https://www.geeksforgeeks.org/python/how-to-play-random-mp3-from-a-folder-in-python/'
+
+# pip3 install pygame - install pygame first if you don't have it
+
+import os
+import random
+import pygame 
+
+pygame.mixer.init() 
+
+folder_path = "C:/Users/green/Music/Music/Sample Music"
+
+mp3_files = [file for file in os.listdir(folder_path) if file.endswith('.mp3')] 
+
+random_mp3 = random.choice(mp3_files)
+
+file_path = os.path.join(folder_path, random_mp3)
+pygame.mixer.music.load(file_path)
+
+
+
+menu = 0 
+
+while menu != 5: 
+    
+    print("- - - - - - - - - - - - ")
+    print("1 - Play Music/restart current song")
+    print("2 - Pause Music")
+    print("3 - Resume Music")
+    print("4 - Next Song")
+    print("5 - Exit")
+    #print()
+    
+    print("- - - - - - - - - - - - ")
+    print()
+    menu = int(input("What would you like to do? "))
+    print()
+    print("- - - - - - - - - - - - ")
+
+
+    if menu == 1: 
+        pygame.mixer.music.play()
+
+    if menu == 2: 
+        pygame.mixer.music.pause()
+
+    if menu == 3: 
+        pygame.mixer.music.unpause()
+
+    if menu == 4: 
+
+        random_mp3 = random.choice(mp3_files)
+        file_path = os.path.join(folder_path, random_mp3)
+        pygame.mixer.music.load(file_path)
+        pygame.mixer.music.play()
