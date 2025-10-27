@@ -16,7 +16,8 @@ offset_right = -39.0
 offset_bottom = 333.0
 flat = true
 
-[node name="Control" type="AudioStreamPlayer" parent="X button"]
+[node name="Control" type="Control" parent="X button"]
+anchors_preset = 0
 
 [node name="replay button" type="Button" parent="."]
 offset_left = -9.65741
@@ -27,10 +28,6 @@ flat = true
 
 [node name="Control" type="Control" parent="replay button"]
 anchors_preset = 0
-offset_left = -2.7369308
-offset_top = -2.0529556
-offset_right = 126.24592
-offset_bottom = 127.9562
 
 [node name="like button" type="Button" parent="."]
 offset_left = 144.985
@@ -41,10 +38,6 @@ flat = true
 
 [node name="Control" type="Control" parent="like button"]
 anchors_preset = 0
-offset_left = 0.00024414063
-offset_top = 0.3427124
-offset_right = 130.00946
-offset_bottom = 128.9834
 
 [node name="YourListButton" type="Button" parent="."]
 offset_left = 217.174
