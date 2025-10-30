@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvhnlgaks06ad"
-path="res://.godot/imported/UI SE Title Screen Music.png-43405f7458e1f9ec6e63aecb0f59f801.ctex"
+uid="uid://dp5y757txmkgf"
+path="res://.godot/imported/UI_SE_Music_Project_Example_Product.png-878ee75dabcb3671b2d8be5c9b745d42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/UI SE Title Screen Music.png"
-dest_files=["res://.godot/imported/UI SE Title Screen Music.png-43405f7458e1f9ec6e63aecb0f59f801.ctex"]
+source_file="res://Resources/UI_SE_Music_Project_Example_Product.png"
+dest_files=["res://.godot/imported/UI_SE_Music_Project_Example_Product.png-878ee75dabcb3671b2d8be5c9b745d42.ctex"]
 
 [params]
 

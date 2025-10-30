@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b446rlfgqc66p"]
 
-[ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI SI Music BLANK TEMPLATE.png" id="1_b34ge"]
+[ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI_SI_Music_BLANK_TEMPLATE.png" id="1_b34ge"]
 [ext_resource type="Script" uid="uid://b7o8yh73yx7pa" path="res://Scripts/SongPlayer.gd" id="2_sjqfn"]
 [ext_resource type="Script" uid="uid://cxbqe11pos07d" path="res://Scripts/ApiClient.gd" id="3_1xgel"]
 
@@ -71,6 +71,13 @@ autowrap_mode = 2
 
 [node name="ImageThumbnail" type="Sprite2D" parent="AudioStreamPlayer2D"]
 position = Vector2(196, 250)
+
+[node name="SongProgress" type="ProgressBar" parent="AudioStreamPlayer2D"]
+offset_left = 25.0
+offset_top = 421.0
+offset_right = 358.0
+offset_bottom = 443.0
+show_percentage = false
 
 [connection signal="pressed" from="X button" to="AudioStreamPlayer2D" method="next_pressed"]
 [connection signal="pressed" from="replay button" to="AudioStreamPlayer2D" method="replay_presssed"]

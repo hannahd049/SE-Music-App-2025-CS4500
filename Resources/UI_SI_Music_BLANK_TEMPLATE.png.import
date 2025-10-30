@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2y6lbxdtayhc"
-path="res://.godot/imported/UI SE Finished TEMPLATE.png-4ce9cdfc198c3dcc2b02349d466c7395.ctex"
+uid="uid://bxcuiasjxlx08"
+path="res://.godot/imported/UI_SI_Music_BLANK_TEMPLATE.png-1423087239f03626d87abebd3ddb1179.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/UI SE Finished TEMPLATE.png"
-dest_files=["res://.godot/imported/UI SE Finished TEMPLATE.png-4ce9cdfc198c3dcc2b02349d466c7395.ctex"]
+source_file="res://Resources/UI_SI_Music_BLANK_TEMPLATE.png"
+dest_files=["res://.godot/imported/UI_SI_Music_BLANK_TEMPLATE.png-1423087239f03626d87abebd3ddb1179.ctex"]
 
 [params]
 
