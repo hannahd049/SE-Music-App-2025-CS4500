@@ -50,6 +50,7 @@ func get_thumbnail(song_id: int, sprite: Sprite2D):
 func _on_response(result, response_code, headers, body) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS:
 		push_error("Request failed with error: " +  "%s" % response_code)
+		return
 	
 	var song_name = ""
 	var song_id = 0

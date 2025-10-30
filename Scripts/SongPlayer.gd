@@ -3,6 +3,7 @@ extends AudioStreamPlayer
 
 var api_client: ApiClient = null
 var image_sprite: Sprite2D = null
+var song_progress: ProgressBar = null
 var name_label: Label = null
 var last_position: float = 0
 var song_id: int = 0
@@ -14,6 +15,7 @@ func _enter_tree() -> void:
 	api_client = get_node("ApiClient")
 	image_sprite = get_node("ImageThumbnail")
 	name_label = get_node("SongNameLabel")
+	song_progress = get_node("SongProgress")
 	api_client.song_received.connect(_on_song_received)
 	get_after_next_frame()
 
@@ -30,10 +32,12 @@ func play_pressed() -> void:
 		play(last_position)
 	elif stream != null:
 		play()
+		song_progress.value = 0
 
 func replay_presssed() -> void:
 	print("replay")
 	seek(0)
+	song_progress.value = 0
 	if !playing:
 		play()
 
@@ -54,8 +58,13 @@ func _load_next_song() -> void:
 		playing = false
 	song_id = 0
 	last_position = 0
+	song_progress.value = 0
 	name_label.text = "Loading..."
 	api_client.get_next_song()
+
+func _process(_delta: float) -> void:
+	if playing:
+		song_progress.value = get_playback_position()
 
 func _on_song_received(n: String, id: int, body: PackedByteArray) -> void:
 	print("Song received")
@@ -64,4 +73,7 @@ func _on_song_received(n: String, id: int, body: PackedByteArray) -> void:
 	api_client.get_thumbnail(song_id, image_sprite)
 	print(song_id)
 	stream = AudioStreamMP3.load_from_buffer(body)
+	
+	song_progress.max_value = stream.get_length()
+	
 	play_pressed()
