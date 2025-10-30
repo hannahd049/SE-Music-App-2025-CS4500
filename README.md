@@ -13,37 +13,37 @@
 ### Document by Ekene "E.J." Onyekachi
 ---
 #### Features
--Play 5 to 10 seconds of song intially
--Plays up to 30 seconds with REPLAY ability
--Vote YAY or NAY on song
--Liked songs get saved to playlist
--User gets fed more songs based on song information or can just be used for stats
--Ability to sort liked songs into different playlists
+-Play 5 to 10 seconds of song intially<br>
+-Plays up to 30 seconds with REPLAY ability<br>
+-Vote YAY or NAY on song<br>
+-Liked songs get saved to playlist<br>
+-User gets fed more songs based on song information or can just be used for stats<br>
+-Ability to sort liked songs into different playlists<br>
 ##### Song Information
--Title
--Artist
--Year
--Genre
--Mood
+-Title<br>
+-Artist<br>
+-Year<br>
+-Genre<br>
+-Mood<br>
 ##### Stats
--How many _____ have you liked/disliked
--"How many pop songs have you liked"
--"You liked # songs from the 80s"
+-How many _____ have you liked/disliked<br>
+-"How many pop songs have you liked"<br>
+-"You liked # songs from the 80s"<br>
 
 #### Requirements
 ##### System Requirements (Minimum)
--Being able to click + execute tasks correctly
--Plays and switches songs 
--Start Screen
--Songs gets added to a list (if liked)
+-Being able to click + execute tasks correctly<br>
+-Plays and switches songs<br>
+-Start Screen<br>
+-Songs gets added to a list (if liked)<br>
 ##### User Requirements
--Playable devices 
--Has usable hands
--Critical thinking required
-*Cannot be deaf
-**No captions included
+-Playable devices<br> 
+-Has usable hands<br>
+-Critical thinking required<br>
+*Cannot be deaf<br>
+**No captions included<br>
 #### Risks and Mitigations
-*API may run twice
-**Solution: Implementing a singleton pattern
-*Possiblity of lawsuit by original artists
-**Solution: 30 second runtime
+*API may run twice<br>
+**Solution: Implementing a singleton pattern<br>
+*Possiblity of lawsuit by original artists<br>
+**Solution: 30 second runtime<br>
