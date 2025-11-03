@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d4jp8o6asoxq1"]
 
-[ext_resource type="Texture2D" uid="uid://bboygw43umeg8" path="res://YourListScreen.png" id="1_ta4l2"]
-[ext_resource type="Script" uid="uid://dms4vsm244p5l" path="res://your_list_screen.gd" id="2_dy7vd"]
+[ext_resource type="Texture2D" uid="uid://bmbwdcmikaaa" path="res://Resources/YourListScreen.png" id="1_ta4l2"]
+[ext_resource type="Script" uid="uid://3he64q4ce5x5" path="res://Scripts/your_list_screen.gd" id="2_dy7vd"]
 
 [node name="YourListScreen" type="Sprite2D"]
 position = Vector2(684, 377)

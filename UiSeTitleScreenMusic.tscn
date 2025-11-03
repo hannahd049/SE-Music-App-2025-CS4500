@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhcrt3o5jyjb"]
 
-[ext_resource type="Texture2D" uid="uid://cpkupur2vs0x3" path="res://UI SE Title Screen Music.png" id="1_0wmm8"]
-[ext_resource type="Script" uid="uid://dkatwqn4kl4eg" path="res://ui_se_title_screen_music.gd" id="2_ocpaw"]
+[ext_resource type="Texture2D" uid="uid://cvhnlgaks06ad" path="res://Resources/UI_SE_Title_Screen_Music.png" id="1_0wmm8"]
+[ext_resource type="Script" uid="uid://fy5bxxxrng3u" path="res://Scripts/ui_se_title_screen_music.gd" id="2_ocpaw"]
 
 [node name="Node2D" type="Node2D"]
 
