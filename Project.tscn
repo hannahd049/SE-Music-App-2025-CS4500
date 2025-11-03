@@ -53,13 +53,13 @@ offset_right = -112.116
 offset_bottom = -301.236
 flat = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+[node name="SongPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("2_sjqfn")
 
-[node name="ApiClient" type="Node" parent="AudioStreamPlayer2D"]
+[node name="ApiClient" type="Node" parent="SongPlayer"]
 script = ExtResource("3_1xgel")
 
-[node name="SongNameLabel" type="Label" parent="AudioStreamPlayer2D"]
+[node name="SongNameLabel" type="Label" parent="SongPlayer"]
 offset_left = 67.0
 offset_top = 377.0
 offset_right = 321.0
@@ -69,16 +69,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="ImageThumbnail" type="Sprite2D" parent="AudioStreamPlayer2D"]
+[node name="ImageThumbnail" type="Sprite2D" parent="SongPlayer"]
 position = Vector2(196, 250)
 
-[node name="SongProgress" type="ProgressBar" parent="AudioStreamPlayer2D"]
+[node name="SongProgress" type="ProgressBar" parent="SongPlayer"]
 offset_left = 25.0
 offset_top = 421.0
 offset_right = 358.0
 offset_bottom = 443.0
 show_percentage = false
 
-[connection signal="pressed" from="X button" to="AudioStreamPlayer2D" method="next_pressed"]
-[connection signal="pressed" from="replay button" to="AudioStreamPlayer2D" method="replay_presssed"]
-[connection signal="pressed" from="like button" to="AudioStreamPlayer2D" method="like_pressed"]
+[connection signal="pressed" from="X button" to="SongPlayer" method="next_pressed"]
+[connection signal="pressed" from="replay button" to="SongPlayer" method="replay_presssed"]
+[connection signal="pressed" from="like button" to="SongPlayer" method="like_pressed"]

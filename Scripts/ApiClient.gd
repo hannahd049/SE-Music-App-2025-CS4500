@@ -4,10 +4,27 @@ extends Node
 signal song_received
 
 const apiUrl = "http://127.0.0.1:5128/api"
-static var userId = "user123" #todo
+static var userId = ""
 
-func init() -> void:
-	pass #todo: save/load userid from file
+func _init() -> void:
+	if FileAccess.file_exists("user://id.txt"):
+		var reader = FileAccess.open("user://id.txt", FileAccess.READ)
+		userId = reader.get_as_text()
+	else:
+		userId = _generate_random_id()
+		var writer = FileAccess.open("user://id.txt", FileAccess.WRITE)
+		writer.store_string(userId)
+
+func _generate_random_id() -> String:
+	var rand = RandomNumberGenerator.new()
+	rand.randomize()
+	
+	var a = rand.randi()
+	var b = rand.randi()
+	var c = rand.randi()
+	var d = rand.randi()
+	
+	return String.num_uint64(a, 16) + String.num_uint64(b, 16) + String.num_uint64(c, 16) + String.num_uint64(d, 16)
 
 func rate_song(song_id: int, positive: bool):
 	var request = HTTPRequest.new()
