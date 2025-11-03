@@ -5,3 +5,7 @@
 export.cfg
 export_presets.cfg
 .cache/
+.vscode/
+.vs/
+bin/
+obj/
