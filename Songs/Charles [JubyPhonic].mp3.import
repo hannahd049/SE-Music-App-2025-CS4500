@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dpiy1addm5h3b"
+path="res://.godot/imported/Charles [JubyPhonic].mp3-1cf0c69f1919113d4139728fbdef455b.mp3str"
+
+[deps]
+
+source_file="res://Songs/Charles [JubyPhonic].mp3"
+dest_files=["res://.godot/imported/Charles [JubyPhonic].mp3-1cf0c69f1919113d4139728fbdef455b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
