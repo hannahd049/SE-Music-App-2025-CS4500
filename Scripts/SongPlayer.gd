@@ -34,6 +34,14 @@ func play_pressed() -> void:
 		play()
 		song_progress.value = 0
 
+func home_presssed() -> void:
+	_stop_music()
+	UIHelper.switch_to_home(self)
+
+func list_presssed() -> void:
+	_stop_music()
+	UIHelper.switch_to_list(self)
+
 func replay_presssed() -> void:
 	print("replay")
 	seek(0)
@@ -61,6 +69,10 @@ func _load_next_song() -> void:
 	song_progress.value = 0
 	name_label.text = "Loading..."
 	api_client.get_next_song()
+
+func _stop_music() -> void:
+	if playing:
+		play_pressed()
 
 func _process(_delta: float) -> void:
 	if playing:

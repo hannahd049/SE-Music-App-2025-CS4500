@@ -7,6 +7,9 @@ const apiUrl = "http://127.0.0.1:5128/api"
 static var userId = ""
 
 func _init() -> void:
+	if userId != "":
+		return
+	
 	if FileAccess.file_exists("user://id.txt"):
 		var reader = FileAccess.open("user://id.txt", FileAccess.READ)
 		userId = reader.get_as_text()
