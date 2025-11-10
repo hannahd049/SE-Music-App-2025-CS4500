@@ -8,6 +8,12 @@ namespace TestBackend.Controllers;
 [Route("api")]
 public class SongController : ControllerBase
 {
+    private readonly SongStorage _storageService;
+
+    public SongController(SongStorage storageService)
+    {
+        _storageService = storageService;
+    }
 
     [HttpGet("ns")]
     public IActionResult GetNextSong()
@@ -21,22 +27,38 @@ public class SongController : ControllerBase
     }
 
     [HttpGet("rt")]
-    public IActionResult GetSontThumbnail([FromQuery] int songId)
+    public IActionResult GetSongThumbnail([FromQuery] int songId)  // Fixed typo: GetSontThumbnail → GetSongThumbnail
     {
         //todo: database impl
-        Console.WriteLine($"Request for thubmnail for {songId}");
+        Console.WriteLine($"Request for thumbnail for {songId}");  // Fixed typo: thubmnail → thumbnail
         var stream = System.IO.File.OpenRead("testThumbnail.png");
 
         return File(stream, MediaTypeNames.Application.Octet);
     }
 
     [HttpPost("rs")]
-    public IActionResult RateSong([FromBody] RateRequest request)
+    public async Task<IActionResult> RateSong([FromBody] RateRequest request)
     {
-        //todo:
-
+        //todo
         Console.WriteLine($"{request.UserId} {(request.PositiveRating ? "likes" : "dislikes")} {request.SongId}");
 
+        
+        await _storageService.RateSong(request.UserId, request.SongId, request.PositiveRating);
+        return Ok();
+    }
+
+    
+    [HttpGet("likedsongs/{userId}")]
+    public async Task<ActionResult<List<LikedSong>>> GetLikedSongs(string userId)
+    {
+        var likedSongs = await _storageService.GetLikedSongs(userId);
+        return Ok(likedSongs);
+    }
+
+    [HttpDelete("likedsongs/{userId}/{songId}")]
+    public async Task<IActionResult> RemoveLikedSong(string userId, int songId)
+    {
+        await _storageService.RemoveLike(userId, songId);
         return Ok();
     }
 }
