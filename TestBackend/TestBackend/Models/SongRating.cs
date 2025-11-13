@@ -32,8 +32,11 @@ public class MemorySongStorage : SongStorage
         _songNames[1234] = "TestSong";
     }
 
-    public Task RateSong(string userId, int songId, bool positive)
+    public async Task RateSong(string userId, int songId, bool positive)
     {
+       
+        await Task.Delay(1);
+
         _ratings.RemoveAll(r => r.UserId == userId && r.SongId == songId);  
         
         if(positive)
@@ -46,12 +49,12 @@ public class MemorySongStorage : SongStorage
                 RatedAt = DateTime.UtcNow
             });
         }
-
-        return Task.CompletedTask;
     }
 
-    public Task<List<LikedSong>> GetLikedSongs(string userId)
-    {
+    public async Task<List<LikedSong>> GetLikedSongs(string userId)
+    {   
+        await Task.Delay(1);
+
         var likedSongs = _ratings
             .Where(r => r.UserId == userId && r.Positive)
             .OrderByDescending(r => r.RatedAt)
@@ -63,12 +66,13 @@ public class MemorySongStorage : SongStorage
             })
             .ToList();
 
-        return Task.FromResult(likedSongs);
+        return likedSongs;
     }
 
-    public Task RemoveLike(string userId, int songId)
+    public async Task RemoveLike(string userId, int songId)
     {
+        await Task.Delay(1);
+
         _ratings.RemoveAll(r => r.UserId == userId && r.SongId == songId);
-        return Task.CompletedTask;
     }
 }
