@@ -79,8 +79,16 @@ offset_right = 358.0
 offset_bottom = 443.0
 show_percentage = false
 
+[node name="PlayPauseButon" type="Button" parent="."]
+offset_left = -100.496284
+offset_top = -206.31546
+offset_right = 208.72308
+offset_bottom = 77.53256
+flat = true
+
 [connection signal="pressed" from="X button" to="SongPlayer" method="next_pressed"]
 [connection signal="pressed" from="replay button" to="SongPlayer" method="replay_presssed"]
 [connection signal="pressed" from="like button" to="SongPlayer" method="like_pressed"]
 [connection signal="pressed" from="YourListButton" to="SongPlayer" method="list_presssed"]
 [connection signal="pressed" from="home button" to="SongPlayer" method="home_presssed"]
+[connection signal="pressed" from="PlayPauseButon" to="SongPlayer" method="_on_play_pause_buton_pressed"]
