@@ -37,28 +37,28 @@ public class SongController : ControllerBase
     }
 
     [HttpPost("rs")]
-    public async Task<IActionResult> RateSong([FromBody] RateRequest request)
+    public IActionResult RateSong([FromBody] RateRequest request)
     {
         //todo
         Console.WriteLine($"{request.UserId} {(request.PositiveRating ? "likes" : "dislikes")} {request.SongId}");
 
         
-        await _storageService.RateSong(request.UserId, request.SongId, request.PositiveRating);
+         _storageService.RateSong(request.UserId, request.SongId, request.PositiveRating);
         return Ok();
     }
 
     
     [HttpGet("likedsongs/{userId}")]
-    public async Task<ActionResult<List<LikedSong>>> GetLikedSongs(string userId)
+    public ActionResult<List<LikedSong>> GetLikedSongs(string userId)
     {
         var likedSongs = await _storageService.GetLikedSongs(userId);
         return Ok(likedSongs);
     }
 
     [HttpDelete("likedsongs/{userId}/{songId}")]
-    public async Task<IActionResult> RemoveLikedSong(string userId, int songId)
+    public IActionResult RemoveLikedSong(string userId, int songId)
     {
-        await _storageService.RemoveLike(userId, songId);
+         _storageService.RemoveLike(userId, songId);
         return Ok();
     }
 }
