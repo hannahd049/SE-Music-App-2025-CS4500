@@ -17,9 +17,9 @@ public class LikedSong
 
 public interface SongStorage
 {
-    Task RateSong(string userId, int songId, bool positive);
-    Task<List<LikedSong>> GetLikedSongs(string userId); 
-    Task RemoveLike(string userId, int songId);
+    void RateSong(string userId, int songId, bool positive);
+    List<List<LikedSong>> GetLikedSongs(string userId); 
+    void RemoveLike(string userId, int songId);
 }
 
 public class MemorySongStorage : SongStorage
@@ -32,10 +32,10 @@ public class MemorySongStorage : SongStorage
         _songNames[1234] = "TestSong";
     }
 
-    public async Task RateSong(string userId, int songId, bool positive)
+    public void RateSong(string userId, int songId, bool positive)
     {
        
-        await Task.Delay(1);
+        
 
         _ratings.RemoveAll(r => r.UserId == userId && r.SongId == songId);  
         
@@ -51,9 +51,9 @@ public class MemorySongStorage : SongStorage
         }
     }
 
-    public async Task<List<LikedSong>> GetLikedSongs(string userId)
+    public List<LikedSong> GetLikedSongs(string userId)
     {   
-        await Task.Delay(1);
+        
 
         var likedSongs = _ratings
             .Where(r => r.UserId == userId && r.Positive)
@@ -69,9 +69,8 @@ public class MemorySongStorage : SongStorage
         return likedSongs;
     }
 
-    public async Task RemoveLike(string userId, int songId)
+    public void RemoveLike(string userId, int songId)
     {
-        await Task.Delay(1);
 
         _ratings.RemoveAll(r => r.UserId == userId && r.SongId == songId);
     }
