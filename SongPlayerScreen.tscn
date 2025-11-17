@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b446rlfgqc66p"]
+[gd_scene load_steps=5 format=3 uid="uid://b446rlfgqc66p"]
 
 [ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI_SI_Music_BLANK_TEMPLATE.png" id="1_ttcn4"]
 [ext_resource type="Script" uid="uid://b7o8yh73yx7pa" path="res://Scripts/SongPlayer.gd" id="2_i43fu"]
 [ext_resource type="Script" uid="uid://cxbqe11pos07d" path="res://Scripts/ApiClient.gd" id="3_8woxx"]
+[ext_resource type="Texture2D" uid="uid://cg1teikpteg2u" path="res://Resources/playpause.png" id="4_i43fu"]
 
 [node name="SongPlayerScreen" type="Sprite2D"]
 position = Vector2(153, 304)
@@ -80,11 +81,15 @@ offset_bottom = 443.0
 show_percentage = false
 
 [node name="PlayPauseButon" type="Button" parent="."]
-offset_left = -100.496284
-offset_top = -206.31546
-offset_right = 208.72308
-offset_bottom = 77.53256
+top_level = true
+offset_left = 87.0
+offset_top = 143.0
+offset_right = 295.0
+offset_bottom = 359.0
+icon = ExtResource("4_i43fu")
 flat = true
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="pressed" from="X button" to="SongPlayer" method="next_pressed"]
 [connection signal="pressed" from="replay button" to="SongPlayer" method="replay_presssed"]
