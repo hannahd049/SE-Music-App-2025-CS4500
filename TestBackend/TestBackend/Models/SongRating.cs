@@ -75,3 +75,4 @@ public class MemorySongStorage : SongStorage
         _ratings.RemoveAll(r => r.UserId == userId && r.SongId == songId);
     }
 }
+ 
