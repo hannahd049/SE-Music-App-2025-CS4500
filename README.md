@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Todo: Actual ReadMe
-=======
 # Software Requirements Specification (SRS)
 ## Project: **Hit or Miss** (Music Tinder)
 ## Course: CS 4500 – Risks and Requirements
