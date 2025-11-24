@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://b446rlfgqc66p"]
+
+[ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI_SI_Music_BLANK_TEMPLATE.png" id="1_ttcn4"]
+[ext_resource type="Script" uid="uid://b7o8yh73yx7pa" path="res://Scripts/SongPlayer.gd" id="2_i43fu"]
+[ext_resource type="Script" uid="uid://cxbqe11pos07d" path="res://Scripts/ApiClient.gd" id="3_8woxx"]
+
+[node name="SongPlayerScreen" type="Sprite2D"]
+position = Vector2(153, 304)
+scale = Vector2(0.7761481, 0.76097065)
+texture = ExtResource("1_ttcn4")
+
+[node name="X button" type="Button" parent="."]
+offset_left = -165.0
+offset_top = 205.0
+offset_right = -39.0
+offset_bottom = 333.0
+flat = true
+
+[node name="Control" type="Control" parent="X button"]
+anchors_preset = 0
+
+[node name="replay button" type="Button" parent="."]
+offset_left = -9.65741
+offset_top = 205.62
+offset_right = 116.343
+offset_bottom = 333.62
+flat = true
+
+[node name="Control" type="Control" parent="replay button"]
+anchors_preset = 0
+
+[node name="like button" type="Button" parent="."]
+offset_left = 144.985
+offset_top = 204.935
+offset_right = 270.985
+offset_bottom = 332.935
+flat = true
+
+[node name="Control" type="Control" parent="like button"]
+anchors_preset = 0
+
+[node name="YourListButton" type="Button" parent="."]
+offset_left = 217.174
+offset_top = -359.236
+offset_right = 275.174
+offset_bottom = -301.236
+flat = true
+
+[node name="home button" type="Button" parent="."]
+offset_left = -170.116
+offset_top = -359.236
+offset_right = -112.116
+offset_bottom = -301.236
+flat = true
+
+[node name="SongPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_i43fu")
+
+[node name="ApiClient" type="Node" parent="SongPlayer"]
+script = ExtResource("3_8woxx")
+
+[node name="SongNameLabel" type="Label" parent="SongPlayer"]
+offset_left = 67.0
+offset_top = 377.0
+offset_right = 321.0
+offset_bottom = 416.0
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ImageThumbnail" type="Sprite2D" parent="SongPlayer"]
+position = Vector2(196, 250)
+
+[node name="SongProgress" type="ProgressBar" parent="SongPlayer"]
+offset_left = 25.0
+offset_top = 421.0
+offset_right = 358.0
+offset_bottom = 443.0
+show_percentage = false
+
+[connection signal="pressed" from="X button" to="SongPlayer" method="next_pressed"]
+[connection signal="pressed" from="replay button" to="SongPlayer" method="replay_presssed"]
+[connection signal="pressed" from="like button" to="SongPlayer" method="like_pressed"]
+[connection signal="pressed" from="YourListButton" to="SongPlayer" method="list_presssed"]
+[connection signal="pressed" from="home button" to="SongPlayer" method="home_presssed"]

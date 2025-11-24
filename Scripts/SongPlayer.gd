@@ -13,7 +13,7 @@ func _init() -> void:
 	
 func _enter_tree() -> void:
 	api_client = get_node("ApiClient")
-	image_sprite = get_node("ImageThumbnail")
+	image_sprite = get_node("ImageThumbnail") 
 	name_label = get_node("SongNameLabel")
 	song_progress = get_node("SongProgress")
 	api_client.song_received.connect(_on_song_received)
@@ -77,3 +77,17 @@ func _on_song_received(n: String, id: int, body: PackedByteArray) -> void:
 	song_progress.max_value = stream.get_length()
 	
 	play_pressed()
+
+
+func _on_play_pause_buton_pressed() -> void:
+	print("Play/Pause")  #play(from_position: float = 0.0)
+
+	if playing:
+		last_position = get_playback_position()
+		stream_paused = true
+	elif has_stream_playback():
+		play(last_position)
+	elif stream != null:
+		play()
+		song_progress.value = 0
+	
