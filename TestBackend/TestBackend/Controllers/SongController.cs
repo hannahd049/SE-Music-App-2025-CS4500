@@ -51,7 +51,7 @@ public class SongController : ControllerBase
     [HttpGet("likedsongs/{userId}")]
     public ActionResult<List<LikedSong>> GetLikedSongs(string userId)
     {
-        var likedSongs = await _storageService.GetLikedSongs(userId);
+        var likedSongs = _storageService.GetLikedSongs(userId);
         return Ok(likedSongs);
     }
 

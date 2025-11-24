@@ -18,7 +18,7 @@ public class LikedSong
 public interface SongStorage
 {
     void RateSong(string userId, int songId, bool positive);
-    List<List<LikedSong>> GetLikedSongs(string userId); 
+    List<LikedSong> GetLikedSongs(string userId); 
     void RemoveLike(string userId, int songId);
 }
 
