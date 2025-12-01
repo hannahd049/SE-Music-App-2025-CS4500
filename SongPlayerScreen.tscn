@@ -81,10 +81,11 @@ offset_bottom = 443.0
 show_percentage = false
 
 [node name="play_pause_buton" type="Button" parent="."]
-offset_left = -95.342636
-offset_top = -207.62956
-offset_right = 203.56941
-offset_bottom = 69.6479
+top_level = true
+offset_left = 67.0
+offset_top = 134.0
+offset_right = 320.0
+offset_bottom = 374.0
 icon = ExtResource("4_i43fu")
 flat = true
 expand_icon = true
