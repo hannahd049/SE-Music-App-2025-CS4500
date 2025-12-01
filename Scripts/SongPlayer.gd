@@ -33,6 +33,8 @@ func play_pressed() -> void:
 	elif stream != null:
 		play()
 		song_progress.value = 0
+		
+	
 
 func replay_presssed() -> void:
 	print("replay")
@@ -91,3 +93,14 @@ func _on_play_pause_buton_pressed() -> void:
 		play()
 		song_progress.value = 0
 	
+
+
+func _on_home_button_pressed() -> void:
+	stop()
+	UIHelper.switch_to_home(self) 
+	
+
+
+func _on_your_list_button_pressed() -> void:
+	stop()
+	UIHelper.switch_to_list(self)

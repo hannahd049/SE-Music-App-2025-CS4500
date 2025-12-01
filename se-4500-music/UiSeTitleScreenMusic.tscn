@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvoecs5o0prap"]
+
+[ext_resource type="Texture2D" uid="uid://cpkupur2vs0x3" path="res://UI SE Title Screen Music.png" id="1_0wmm8"]
+[ext_resource type="Script" uid="uid://b1xr07kln14so" path="res://ui_se_title_screen_music.gd" id="2_ocpaw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="UiSeTitleScreenMusic" type="Sprite2D" parent="."]
+position = Vector2(465.75, 315.5)
+scale = Vector2(0.868306, 0.8351206)
+texture = ExtResource("1_0wmm8")
+script = ExtResource("2_ocpaw")
+
+[node name="play button" type="Button" parent="."]
+offset_left = 359.0
+offset_top = 196.0
+offset_right = 610.0
+offset_bottom = 427.0
+flat = true
+
+[node name="yourlist button" type="Button" parent="."]
+offset_left = 334.0
+offset_top = 486.0
+offset_right = 638.0
+offset_bottom = 579.0
+flat = true
+
+[connection signal="pressed" from="play button" to="UiSeTitleScreenMusic" method="_on_play_button_pressed"]
+[connection signal="pressed" from="yourlist button" to="UiSeTitleScreenMusic" method="_on_yourlist_button_pressed"]

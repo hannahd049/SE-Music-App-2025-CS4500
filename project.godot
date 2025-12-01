@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CS4500_Music_Tinder"
-run/main_scene="uid://b446rlfgqc66p"
+run/main_scene="uid://dhcrt3o5jyjb"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 

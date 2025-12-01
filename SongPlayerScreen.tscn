@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b446rlfgqc66p"]
+[gd_scene load_steps=5 format=3 uid="uid://b446rlfgqc66p"]
 
 [ext_resource type="Texture2D" uid="uid://bxcuiasjxlx08" path="res://Resources/UI_SI_Music_BLANK_TEMPLATE.png" id="1_ttcn4"]
 [ext_resource type="Script" uid="uid://b7o8yh73yx7pa" path="res://Scripts/SongPlayer.gd" id="2_i43fu"]
 [ext_resource type="Script" uid="uid://cxbqe11pos07d" path="res://Scripts/ApiClient.gd" id="3_8woxx"]
+[ext_resource type="Texture2D" uid="uid://ep2s18e6v0qc" path="res://Resources/pauseplaybutton.png" id="4_i43fu"]
 
 [node name="SongPlayerScreen" type="Sprite2D"]
 position = Vector2(153, 304)
@@ -79,8 +80,18 @@ offset_right = 358.0
 offset_bottom = 443.0
 show_percentage = false
 
+[node name="play_pause_buton" type="Button" parent="."]
+offset_left = -95.342636
+offset_top = -207.62956
+offset_right = 203.56941
+offset_bottom = 69.6479
+icon = ExtResource("4_i43fu")
+flat = true
+expand_icon = true
+
 [connection signal="pressed" from="X button" to="SongPlayer" method="next_pressed"]
 [connection signal="pressed" from="replay button" to="SongPlayer" method="replay_presssed"]
 [connection signal="pressed" from="like button" to="SongPlayer" method="like_pressed"]
-[connection signal="pressed" from="YourListButton" to="SongPlayer" method="list_presssed"]
-[connection signal="pressed" from="home button" to="SongPlayer" method="home_presssed"]
+[connection signal="pressed" from="YourListButton" to="SongPlayer" method="_on_your_list_button_pressed"]
+[connection signal="pressed" from="home button" to="SongPlayer" method="_on_home_button_pressed"]
+[connection signal="pressed" from="play_pause_buton" to="SongPlayer" method="_on_play_pause_buton_pressed"]
