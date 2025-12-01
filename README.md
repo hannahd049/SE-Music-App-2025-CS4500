@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Todo: Actual ReadMe
-=======
 # Software Requirements Specification (SRS)
 ## Project: **Hit or Miss** (Music Tinder)
 ## Course: CS 4500 – Risks and Requirements
@@ -135,5 +132,3 @@ The application provides basic analytics on user preferences.
 
 # 6. Conclusion
 This SRS outlines the structure and requirements necessary to build the **Hit or Miss** music discovery application. By adhering to these specifications, developers can ensure functionality, consistency, and user engagement throughout the system.
-
->>>>>>> 99be8a56dc45f852e5094ce8f0277c6ace77fd2e
