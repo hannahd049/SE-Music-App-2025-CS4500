@@ -30,8 +30,8 @@ func rate_song(song_id: int, positive: bool):
 	var request = HTTPRequest.new()
 	add_child(request)
 	
-	var body = JSON.stringify({"songId": song_id, "positive" : positive, "userId" : userId})
-	var error = request.request(apiUrl + "/rs", ["Content-Type: application/json"], HTTPClient.METHOD_POST, body)
+	var body = JSON.stringify({"songId": song_id, "positive" : positive})
+	var error = request.request(apiUrl + "/rs", ["Content-Type: application/json", "Id: " + userId], HTTPClient.METHOD_POST, body)
 	
 	if error != OK:
 		push_error("Failed to request next song: " + error)
@@ -42,7 +42,7 @@ func get_next_song():
 	
 	request.request_completed.connect(self._on_response)
 	
-	var error = request.request(apiUrl + "/ns", [], HTTPClient.METHOD_GET)
+	var error = request.request(apiUrl + "/ns", ["Id: " + userId], HTTPClient.METHOD_GET)
 	
 	if error != OK:
 		push_error("Failed to request next song: " + error)
