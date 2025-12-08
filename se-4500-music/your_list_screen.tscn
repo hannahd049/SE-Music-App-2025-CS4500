@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://233m4detiuak"]
+
+[ext_resource type="Texture2D" uid="uid://qdh8qjm31oqa" path="res://YourListScreen.png" id="1_ta4l2"]
+[ext_resource type="Script" uid="uid://bicorkto3o7cf" path="res://your_list_screen.gd" id="2_dy7vd"]
+
+[node name="YourListScreen" type="Sprite2D"]
+position = Vector2(644.5, 312)
+scale = Vector2(0.83811474, 0.82666665)
+texture = ExtResource("1_ta4l2")
+script = ExtResource("2_dy7vd")
+
+[node name="home button" type="Button" parent="."]
+offset_left = -227.0
+offset_top = -357.0
+offset_right = -164.0
+offset_bottom = -300.0
+flat = true
+
+[node name="play button" type="Button" parent="."]
+offset_left = 158.0
+offset_top = -354.0
+offset_right = 223.0
+offset_bottom = -304.0
+flat = true
+
+[connection signal="pressed" from="home button" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="play button" to="." method="_on_play_button_pressed"]

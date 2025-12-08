@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
-namespace TestBackend.Models;
+namespace SongBackend.Models;
 
 public class RateRequest
 {
@@ -9,7 +9,4 @@ public class RateRequest
 
     [JsonPropertyName("positive")]
     public bool PositiveRating { get; set; }
-
-    [JsonPropertyName("userId")]
-    public string UserId { get; set; } = string.Empty;
 }

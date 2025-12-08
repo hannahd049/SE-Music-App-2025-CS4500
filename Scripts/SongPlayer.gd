@@ -13,7 +13,7 @@ func _init() -> void:
 	
 func _enter_tree() -> void:
 	api_client = get_node("ApiClient")
-	image_sprite = get_node("ImageThumbnail")
+	image_sprite = get_node("ImageThumbnail") 
 	name_label = get_node("SongNameLabel")
 	song_progress = get_node("SongProgress")
 	api_client.song_received.connect(_on_song_received)
@@ -33,14 +33,8 @@ func play_pressed() -> void:
 	elif stream != null:
 		play()
 		song_progress.value = 0
-
-func home_presssed() -> void:
-	_stop_music()
-	UIHelper.switch_to_home(self)
-
-func list_presssed() -> void:
-	_stop_music()
-	UIHelper.switch_to_list(self)
+		
+	
 
 func replay_presssed() -> void:
 	print("replay")
@@ -70,10 +64,6 @@ func _load_next_song() -> void:
 	name_label.text = "Loading..."
 	api_client.get_next_song()
 
-func _stop_music() -> void:
-	if playing:
-		play_pressed()
-
 func _process(_delta: float) -> void:
 	if playing:
 		song_progress.value = get_playback_position()
@@ -89,3 +79,28 @@ func _on_song_received(n: String, id: int, body: PackedByteArray) -> void:
 	song_progress.max_value = stream.get_length()
 	
 	play_pressed()
+
+
+func _on_play_pause_buton_pressed() -> void:
+	print("Play/Pause")  #play(from_position: float = 0.0)
+
+	if playing:
+		last_position = get_playback_position()
+		stream_paused = true
+	elif has_stream_playback():
+		play(last_position)
+	elif stream != null:
+		play()
+		song_progress.value = 0
+	
+
+
+func _on_home_button_pressed() -> void:
+	stop()
+	UIHelper.switch_to_home(self) 
+	
+
+
+func _on_your_list_button_pressed() -> void:
+	stop()
+	UIHelper.switch_to_list(self)

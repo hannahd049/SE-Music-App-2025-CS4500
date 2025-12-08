@@ -11,6 +11,8 @@ func _enter_tree() -> void:
 
 func get_after_next_frame() -> void:
 	await get_tree().process_frame
+	api_client.get_next_song()
+
 	#todo: request song list from backend
 	
 func play_presssed() -> void:
